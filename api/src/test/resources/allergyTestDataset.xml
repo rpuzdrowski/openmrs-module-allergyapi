@@ -9,4 +9,8 @@
 	<allergy_reaction allergy_reaction_id="2" allergy_id="1" reaction_concept_id="89" uuid="f4f7be24-7601-449e-b216-8a22d80e11cf"/>
 	<allergy_reaction allergy_reaction_id="3" allergy_id="2" reaction_concept_id="90" uuid="2f8a8a23-bef3-4d45-b6d0-2a0ddd0c733b"/>
 	<allergy_reaction allergy_reaction_id="4" allergy_id="2" reaction_concept_id="91" uuid="212d3d01-699a-4941-b1fb-13eaba8e07a2"/>
+
+    <global_property property="concept.otherNonCoded" property_value="5622" uuid="4f55827e-26fe-102b-80cb-0017a47871b4"/>
+
+    <concept concept_id="5622" retired="false" datatype_id="4" class_id="11" is_set="false" creator="1" date_created="2004-08-12 00:00:00.0" version="0.1" changed_by="1" date_changed="2006-06-09 14:57:33.0" uuid="a09ab2c5-878e-4905-b25d-5784167d0217"/>
 </dataset>

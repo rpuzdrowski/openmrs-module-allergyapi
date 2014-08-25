@@ -15,6 +15,7 @@ package org.openmrs.module.allergyapi;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openmrs.Concept;
+import org.openmrs.api.context.Context;
 
 /**
  * Represent allergen
@@ -69,7 +70,11 @@ public class Allergen {
      * @param codedAllergen the codedAllergen to set
      */
     public void setCodedAllergen(Concept codedAllergen) {
-    	this.codedAllergen = codedAllergen;
+		this.codedAllergen = codedAllergen;
+		String otherNonCoded = Context.getAdministrationService().getGlobalProperty("concept.otherNonCoded");
+		if (codedAllergen != null && codedAllergen.getUuid() != Context.getConceptService().getConcept(otherNonCoded).getUuid()) {
+			nonCodedAllergen = null;
+		}
     }
 	
     /**
@@ -83,11 +88,19 @@ public class Allergen {
      * @param nonCodedAllergen the nonCodedAllergen to set
      */
     public void setNonCodedAllergen(String nonCodedAllergen) {
-    	this.nonCodedAllergen = nonCodedAllergen;
+		this.nonCodedAllergen = nonCodedAllergen;
+		if (StringUtils.isNotBlank(nonCodedAllergen)) {
+			String otherNonCoded = Context.getAdministrationService().getGlobalProperty("concept.otherNonCoded");
+			codedAllergen = Context.getConceptService().getConcept(otherNonCoded);
+		}
     }
 
 	boolean isCoded(){
-		return codedAllergen != null;
+		String otherNonCoded = Context.getAdministrationService().getGlobalProperty("concept.otherNonCoded");
+		if (codedAllergen == null || codedAllergen.getUuid() == Context.getConceptService().getConcept(otherNonCoded).getUuid()) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
